@@ -108,7 +108,7 @@ function Toolbar({ editor }: { editor: Editor }) {
   if (!editor) return null;
 
   return (
-    <div className="bg-linear-to-r from-neutral-50 via-white to-neutral-50 border-b border-neutral-200 p-4 flex flex-wrap gap-2 items-center">
+    <div className="sticky top-0 z-20 bg-linear-to-r from-neutral-50 via-white to-neutral-50 border-b border-neutral-200 p-4 flex flex-wrap gap-2 items-center">
       {/* Basic formatting */}
       <ToolbarButton
         onClick={() => editor.chain().focus().toggleBold().run()}
