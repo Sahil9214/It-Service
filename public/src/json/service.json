@@ -1,0 +1,592 @@
+{
+  "services": [
+    {
+      "id": "edtech",
+      "name": "EdTech Solutions",
+      "shortDescription": "Digital learning platforms and education management systems.",
+      "overview": "EdTech solutions enable institutions to digitize learning through LMS, live classes, assessments, and student analytics. Transform traditional education into engaging digital experiences.",
+      "businessProblemsSolved": [
+        "Manual academic operations and paperwork",
+        "Low student engagement and retention",
+        "No centralized performance tracking",
+        "Difficulty in remote learning delivery",
+        "Inefficient communication between teachers and students"
+      ],
+      "industries": [
+        "Schools",
+        "Colleges",
+        "Coaching Institutes",
+        "Corporate Training",
+        "Online Education Platforms"
+      ],
+      "keyFeatures": [
+        "Course Management System",
+        "Live Classes with Video Conferencing",
+        "Automated Assessments & Quizzes",
+        "Student Progress Dashboard",
+        "Payment Integration",
+        "Certificate Generation",
+        "Discussion Forums",
+        "Assignment Submission"
+      ],
+      "optionalFeatures": [
+        "Gamification & Rewards",
+        "Mobile App (iOS & Android)",
+        "AI-based Recommendations",
+        "Proctored Exams",
+        "Parent Portal",
+        "Analytics Dashboard"
+      ],
+      "techStack": {
+        "frontend": ["Next.js", "React"],
+        "backend": ["Node.js", "Express"],
+        "database": ["MongoDB", "PostgreSQL"],
+        "cloud": ["AWS", "Vercel", "Azure"]
+      },
+      "timelineEstimation": "8-16 weeks",
+      "costEstimation": "₹4L – ₹15L",
+      "faqs": [
+        {
+          "question": "Can we integrate with existing systems?",
+          "answer": "Yes, we can integrate with your existing student management systems, payment gateways, and other tools."
+        },
+        {
+          "question": "Is mobile app included?",
+          "answer": "Mobile app is an optional feature and can be added based on your requirements."
+        }
+      ],
+      "counterQuestions": [
+        "How many students will use the platform?",
+        "Do you need live classes or pre-recorded content?",
+        "What payment methods do you want to support?",
+        "Do you need mobile apps or web-only?",
+        "What kind of assessments do you conduct?"
+      ],
+      "subDomains": [
+        {
+          "id": "lms",
+          "name": "Learning Management System (LMS)",
+          "description": "Complete platform to manage digital courses, track student progress, and deliver content effectively.",
+          "howItWorks": "Teachers upload courses, students enroll, complete lessons, take quizzes, and track their progress through an intuitive dashboard.",
+          "features": [
+            "Course Upload & Management",
+            "Progress Tracking",
+            "Quiz & Assessment System",
+            "Certificate Generation",
+            "Student Analytics"
+          ],
+          "useCases": [
+            "Online Coaching Institutes",
+            "Corporate Training Programs",
+            "University E-Learning",
+            "Skill Development Platforms"
+          ],
+          "clientQuestions": [
+            "How will content be organized?",
+            "What types of assessments are needed?"
+          ],
+          "counterQuestions": [
+            "How many courses will you offer initially?",
+            "Do you need content creation tools?",
+            "What certification requirements do you have?"
+          ],
+          "caseStudies": [
+            {
+              "title": "Online Coaching Platform",
+              "clientType": "Coaching Institute",
+              "problem": "Manual course delivery and no way to track student performance",
+              "solution": "Built a complete LMS with video lessons, quizzes, and analytics",
+              "techUsed": ["Next.js", "Node.js", "MongoDB", "AWS S3"],
+              "outcome": "3x increase in student enrollment, 40% improvement in completion rates"
+            }
+          ]
+        },
+        {
+          "id": "live-classes",
+          "name": "Live Virtual Classroom",
+          "description": "Real-time interactive classes with video, audio, screen sharing, and whiteboard features.",
+          "howItWorks": "Teachers schedule classes, students join via link, interact through chat, raise hands, and participate in real-time discussions.",
+          "features": [
+            "HD Video Conferencing",
+            "Screen Sharing",
+            "Interactive Whiteboard",
+            "Chat & Q&A",
+            "Recording & Playback",
+            "Attendance Tracking"
+          ],
+          "useCases": [
+            "Live Tutoring Sessions",
+            "Webinars & Workshops",
+            "Corporate Training",
+            "Language Learning Classes"
+          ],
+          "counterQuestions": [
+            "How many concurrent users per session?",
+            "Do you need class recordings?",
+            "What interactive features are most important?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fintech",
+      "name": "FinTech Solutions",
+      "shortDescription": "Secure financial systems and digital payment platforms.",
+      "overview": "FinTech platforms include digital wallets, lending systems, payment gateways, and transaction engines built with security and compliance at the core.",
+      "businessProblemsSolved": [
+        "Slow and manual transaction processing",
+        "High fraud and security risks",
+        "Lack of digital payment options",
+        "Poor customer experience in banking",
+        "Compliance and regulatory challenges"
+      ],
+      "industries": [
+        "Banks",
+        "NBFC",
+        "Fintech Startups",
+        "Payment Processors",
+        "Insurance Companies"
+      ],
+      "keyFeatures": [
+        "Secure Payment Processing",
+        "KYC & Identity Verification",
+        "Transaction History & Logs",
+        "Multi-currency Support",
+        "Wallet Management",
+        "Fraud Detection",
+        "Compliance Reporting"
+      ],
+      "optionalFeatures": [
+        "AI-based Fraud Detection",
+        "Blockchain Integration",
+        "Credit Scoring System",
+        "Investment Portfolio Management",
+        "Loan Management System"
+      ],
+      "techStack": {
+        "frontend": ["Next.js", "React"],
+        "backend": ["Node.js", "Java", "Python"],
+        "database": ["PostgreSQL", "MongoDB"],
+        "cloud": ["AWS", "Azure"]
+      },
+      "timelineEstimation": "12-24 weeks",
+      "costEstimation": "₹8L – ₹30L",
+      "counterQuestions": [
+        "What types of transactions will you process?",
+        "What compliance standards do you need to meet?",
+        "Do you need integration with existing banking systems?",
+        "What security certifications are required?"
+      ],
+      "subDomains": [
+        {
+          "id": "digital-wallet",
+          "name": "Digital Wallet",
+          "description": "Secure digital wallet for storing money, making payments, and managing transactions.",
+          "features": [
+            "Wallet Top-up & Withdrawal",
+            "P2P Money Transfer",
+            "Transaction History",
+            "QR Code Payments",
+            "Bill Payments"
+          ],
+          "useCases": [
+            "E-commerce Payments",
+            "Peer-to-Peer Transfers",
+            "Bill Payments",
+            "Merchant Payments"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "healthtech",
+      "name": "HealthTech Solutions",
+      "shortDescription": "Digital healthcare management and telemedicine platforms.",
+      "overview": "Comprehensive healthcare solutions including hospital management systems, telemedicine platforms, electronic health records, and patient engagement tools.",
+      "businessProblemsSolved": [
+        "Manual patient record management",
+        "Appointment scheduling inefficiencies",
+        "Poor patient-doctor communication",
+        "Lack of remote consultation options",
+        "Billing and insurance claim delays"
+      ],
+      "industries": [
+        "Hospitals",
+        "Clinics",
+        "Diagnostic Centers",
+        "Telemedicine Providers",
+        "Healthcare Startups"
+      ],
+      "keyFeatures": [
+        "Electronic Health Records (EHR)",
+        "Appointment Booking System",
+        "Patient Management",
+        "Billing & Insurance",
+        "Prescription Management",
+        "Lab Report Integration"
+      ],
+      "optionalFeatures": [
+        "Telemedicine Video Consultation",
+        "AI Diagnostics Support",
+        "Wearable Device Integration",
+        "Medicine Delivery Integration",
+        "Health Analytics Dashboard"
+      ],
+      "techStack": {
+        "frontend": ["Next.js", "React"],
+        "backend": ["Node.js", "Python"],
+        "database": ["MongoDB", "PostgreSQL"],
+        "cloud": ["AWS", "Azure"]
+      },
+      "timelineEstimation": "10-20 weeks",
+      "costEstimation": "₹6L – ₹25L",
+      "counterQuestions": [
+        "What type of healthcare facility do you operate?",
+        "Do you need telemedicine features?",
+        "What compliance requirements (HIPAA, etc.) apply?",
+        "How many patients do you serve daily?"
+      ],
+      "subDomains": [
+        {
+          "id": "hms",
+          "name": "Hospital Management System",
+          "description": "Complete system to manage patients, doctors, appointments, billing, and hospital operations.",
+          "features": [
+            "Patient Registration & Records",
+            "Doctor Scheduling",
+            "Appointment Management",
+            "Billing & Invoicing",
+            "Inventory Management",
+            "Pharmacy Integration"
+          ],
+          "useCases": [
+            "Private Hospitals",
+            "Multi-specialty Clinics",
+            "Diagnostic Centers"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ecommerce",
+      "name": "E-Commerce Platforms",
+      "shortDescription": "Online store and marketplace development.",
+      "overview": "Scalable e-commerce platforms for selling products and services online with features like product catalog, cart, payments, and order management.",
+      "businessProblemsSolved": [
+        "Limited reach due to offline-only presence",
+        "Manual order processing",
+        "Inventory management challenges",
+        "Poor customer experience",
+        "Lack of data-driven insights"
+      ],
+      "industries": [
+        "Retail",
+        "D2C Brands",
+        "Fashion",
+        "Electronics",
+        "Grocery",
+        "Marketplace Platforms"
+      ],
+      "keyFeatures": [
+        "Product Catalog Management",
+        "Shopping Cart",
+        "Payment Gateway Integration",
+        "Order Management",
+        "Admin Panel",
+        "Customer Accounts",
+        "Search & Filters",
+        "Reviews & Ratings"
+      ],
+      "optionalFeatures": [
+        "AI Recommendation Engine",
+        "Multi-vendor Marketplace",
+        "Subscription Model",
+        "Loyalty Programs",
+        "Mobile Apps",
+        "Inventory Management"
+      ],
+      "techStack": {
+        "frontend": ["Next.js", "React"],
+        "backend": ["Node.js", "Express"],
+        "database": ["MongoDB", "PostgreSQL"],
+        "cloud": ["AWS", "Vercel"]
+      },
+      "timelineEstimation": "6-14 weeks",
+      "costEstimation": "₹3L – ₹18L",
+      "counterQuestions": [
+        "How many products will you list?",
+        "Do you need multi-vendor support?",
+        "What payment methods do you want?",
+        "Do you need mobile apps?"
+      ],
+      "subDomains": [
+        {
+          "id": "marketplace",
+          "name": "Multi-Vendor Marketplace",
+          "description": "Platform where multiple sellers can list and sell their products.",
+          "features": [
+            "Vendor Dashboard",
+            "Commission Management",
+            "Vendor Verification",
+            "Product Approval System",
+            "Vendor Analytics"
+          ],
+          "useCases": [
+            "Amazon-like Platforms",
+            "Local Service Marketplaces",
+            "Handmade Product Platforms"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "saas",
+      "name": "SaaS Development",
+      "shortDescription": "Cloud-based subscription software platforms.",
+      "overview": "Build scalable SaaS products with subscription billing, multi-tenant architecture, and enterprise-grade features.",
+      "businessProblemsSolved": [
+        "Need for recurring revenue model",
+        "Manual software distribution",
+        "Lack of scalability",
+        "High maintenance costs",
+        "Poor user analytics"
+      ],
+      "industries": [
+        "Startups",
+        "Enterprises",
+        "Software Companies",
+        "Service Providers"
+      ],
+      "keyFeatures": [
+        "Subscription Billing",
+        "Multi-tenant Architecture",
+        "User Management",
+        "Role-based Access Control",
+        "API Integration",
+        "Analytics Dashboard"
+      ],
+      "optionalFeatures": [
+        "White-label Solution",
+        "Custom Integrations",
+        "Advanced Analytics",
+        "Mobile Apps"
+      ],
+      "techStack": {
+        "frontend": ["Next.js", "React"],
+        "backend": ["Node.js", "Python"],
+        "database": ["PostgreSQL", "MongoDB"],
+        "cloud": ["AWS", "Azure", "GCP"]
+      },
+      "timelineEstimation": "10-24 weeks",
+      "costEstimation": "₹7L – ₹40L",
+      "subDomains": []
+    },
+    {
+      "id": "ai-ml",
+      "name": "AI & Machine Learning",
+      "shortDescription": "Intelligent automation and analytics systems.",
+      "overview": "AI/ML solutions including chatbots, recommendation engines, predictive analytics, and computer vision applications.",
+      "businessProblemsSolved": [
+        "Manual decision-making processes",
+        "Customer support overload",
+        "Lack of personalization",
+        "Inefficient data analysis",
+        "Repetitive task automation"
+      ],
+      "industries": [
+        "E-commerce",
+        "Finance",
+        "Healthcare",
+        "Retail",
+        "Manufacturing"
+      ],
+      "keyFeatures": [
+        "AI Chatbots",
+        "Recommendation Systems",
+        "Predictive Analytics",
+        "Natural Language Processing",
+        "Computer Vision"
+      ],
+      "optionalFeatures": [
+        "Custom AI Models",
+        "Deep Learning Solutions",
+        "Voice Recognition",
+        "Sentiment Analysis"
+      ],
+      "techStack": {
+        "frontend": ["Next.js", "React"],
+        "backend": ["Python", "Node.js"],
+        "database": ["MongoDB", "PostgreSQL"],
+        "cloud": ["AWS", "GCP", "Azure"]
+      },
+      "timelineEstimation": "6-20 weeks",
+      "costEstimation": "₹5L – ₹30L",
+      "subDomains": []
+    },
+    {
+      "id": "logistics",
+      "name": "Logistics & Supply Chain",
+      "shortDescription": "Fleet and shipment management platforms.",
+      "overview": "End-to-end logistics solutions for tracking deliveries, optimizing routes, and managing fleet operations.",
+      "businessProblemsSolved": [
+        "Manual tracking and coordination",
+        "Delivery delays",
+        "Inefficient route planning",
+        "Poor visibility into operations",
+        "High operational costs"
+      ],
+      "industries": [
+        "Transport Companies",
+        "E-commerce",
+        "Courier Services",
+        "Manufacturing"
+      ],
+      "keyFeatures": [
+        "Real-time GPS Tracking",
+        "Route Optimization",
+        "Fleet Management",
+        "Delivery Scheduling",
+        "Driver Management"
+      ],
+      "optionalFeatures": [
+        "Driver Mobile App",
+        "Customer Tracking Portal",
+        "Analytics Dashboard",
+        "Automated Dispatch"
+      ],
+      "techStack": {
+        "frontend": ["Next.js", "React"],
+        "backend": ["Node.js", "Python"],
+        "database": ["MongoDB", "PostgreSQL"],
+        "cloud": ["AWS", "Azure"]
+      },
+      "timelineEstimation": "8-18 weeks",
+      "costEstimation": "₹6L – ₹22L",
+      "subDomains": []
+    },
+    {
+      "id": "proptech",
+      "name": "PropTech Solutions",
+      "shortDescription": "Real estate and property management software.",
+      "overview": "Digital platforms for property listings, management, transactions, and customer relationship management in real estate.",
+      "businessProblemsSolved": [
+        "Manual property listing management",
+        "Inefficient broker coordination",
+        "Poor lead management",
+        "Lack of virtual property tours",
+        "Document management challenges"
+      ],
+      "industries": [
+        "Real Estate Firms",
+        "Property Developers",
+        "Brokers",
+        "Property Management Companies"
+      ],
+      "keyFeatures": [
+        "Property Listings",
+        "CRM System",
+        "Lead Management",
+        "Document Management",
+        "Search & Filters"
+      ],
+      "optionalFeatures": [
+        "Virtual Tours (360°)",
+        "Payment Integration",
+        "Tenant Portal",
+        "Maintenance Tracking"
+      ],
+      "techStack": {
+        "frontend": ["Next.js", "React"],
+        "backend": ["Node.js"],
+        "database": ["MongoDB", "PostgreSQL"],
+        "cloud": ["AWS", "Vercel"]
+      },
+      "timelineEstimation": "8-16 weeks",
+      "costEstimation": "₹4L – ₹20L",
+      "subDomains": []
+    },
+    {
+      "id": "hrtech",
+      "name": "HRTech Solutions",
+      "shortDescription": "Recruitment and HR management systems.",
+      "overview": "Comprehensive HR platforms for recruitment, employee management, payroll, and performance tracking.",
+      "businessProblemsSolved": [
+        "Manual hiring processes",
+        "Payroll inefficiencies",
+        "Poor employee engagement",
+        "Lack of performance tracking",
+        "Compliance management"
+      ],
+      "industries": [
+        "Enterprises",
+        "Startups",
+        "Recruitment Agencies",
+        "HR Consultancies"
+      ],
+      "keyFeatures": [
+        "Applicant Tracking System",
+        "Payroll Management",
+        "Employee Database",
+        "Leave Management",
+        "Performance Reviews"
+      ],
+      "optionalFeatures": [
+        "AI Resume Screening",
+        "Employee Self-Service Portal",
+        "Training Management",
+        "Analytics Dashboard"
+      ],
+      "techStack": {
+        "frontend": ["Next.js", "React"],
+        "backend": ["Node.js"],
+        "database": ["MongoDB", "PostgreSQL"],
+        "cloud": ["AWS", "Azure"]
+      },
+      "timelineEstimation": "6-14 weeks",
+      "costEstimation": "₹3L – ₹15L",
+      "subDomains": []
+    },
+    {
+      "id": "cybersecurity",
+      "name": "Cybersecurity Solutions",
+      "shortDescription": "Security audits and protection systems.",
+      "overview": "Comprehensive cybersecurity services including security audits, penetration testing, and threat monitoring.",
+      "businessProblemsSolved": [
+        "Data breaches and cyber attacks",
+        "Compliance risks",
+        "Lack of security monitoring",
+        "Vulnerable systems",
+        "Insider threats"
+      ],
+      "industries": [
+        "Finance",
+        "Healthcare",
+        "Government",
+        "E-commerce",
+        "Enterprises"
+      ],
+      "keyFeatures": [
+        "Security Audit",
+        "Penetration Testing",
+        "Vulnerability Assessment",
+        "Compliance Reporting",
+        "Security Training"
+      ],
+      "optionalFeatures": [
+        "Real-time Threat Monitoring",
+        "Incident Response",
+        "Security Operations Center (SOC)",
+        "Managed Security Services"
+      ],
+      "techStack": {
+        "frontend": ["Next.js", "React"],
+        "backend": ["Node.js", "Python"],
+        "database": ["MongoDB", "PostgreSQL"],
+        "cloud": ["AWS", "Azure"]
+      },
+      "timelineEstimation": "4-12 weeks",
+      "costEstimation": "₹2L – ₹12L",
+      "subDomains": []
+    }
+  ]
+}
