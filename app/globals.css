@@ -1,6 +1,242 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap");
-
 @import "tailwindcss";
+
+@layer base {
+  :root {
+    /* ============================================
+       BASE COLORS
+       ============================================ */
+    --color-primary: #8a1d20;
+    --color-primary-dark: #871619;
+    --color-primary-dark-alt: #871620;
+    --color-secondary: #fec901;
+    --color-progress-bar: #fec60d;
+    --color-white: #fff;
+    --color-black: #000;
+    --color-charcoal-black: #1d2434;
+
+    /* RGB values for rgba() usage */
+    --color-primary-rgb: 138, 29, 32;
+    --color-primary-dark-rgb: 135, 22, 25;
+    --color-secondary-rgb: 254, 201, 1;
+
+    /* ============================================
+       SUBJECT COLORS - Primary Variants
+       ============================================ */
+    --color-subject-physics: #ffa500;
+    --color-subject-chemistry: #85348c;
+    --color-subject-mathematics: #003366;
+    --color-subject-biology: #40e0d0;
+    --color-subject-history: #8b4513;
+    --color-subject-civics: #008080;
+    --color-subject-geography: #2196f3;
+    --color-subject-commerce: #2196f3;
+    --color-subject-english: #1e3a8a;
+    --color-subject-kiswahili: #800000;
+
+    /* Subject Colors - Alternative Variants (from globals.scss) */
+    --color-subject-physics-alt: #782121;
+    --color-subject-girls-leadership: #207d3d;
+    --color-subject-literature: #666943;
+    --color-subject-geography-alt: #006680;
+    --color-subject-ics: #2c0d1d;
+    --color-subject-mathematics-alt: #241c1c;
+    --color-subject-biology-alt: #aad400;
+    --color-subject-chemistry-alt: #7f3e98;
+    --color-subject-english-alt: #0055d4;
+    --color-subject-civics-alt: #13a89e;
+    --color-subject-history-alt: #a48e68;
+    --color-subject-life-skills: #c48655;
+    --color-subject-commerce-alt: #d82f4f;
+    --color-subject-bookkeeping: #ff642f;
+
+    /* Subject Colors - Quiz Variants */
+    --color-subject-physics-quiz: #ff9800;
+    --color-subject-chemistry-quiz: #9c27b0;
+    --color-subject-mathematics-quiz: #1976d2;
+    --color-subject-biology-quiz: #00bcd4;
+    --color-subject-history-quiz: #d84315;
+
+    /* ============================================
+       TEXT COLORS
+       ============================================ */
+    --color-text-primary: #1e1e1e;
+    --color-text-secondary: #757575;
+    --color-text-tertiary: #b3b3b3;
+    --color-text-danger: #900b09;
+    --color-text-manatee: #898d95;
+    --color-text-charcoal: #343a40;
+    --color-text-slate-blue: #7a7f9a;
+    --color-text-grey: #95999e;
+    --color-text-cod-gray: #323338;
+    --color-text-medium-gray: #555555;
+    --color-text-dark-gray: #111;
+    --color-text-white-alt: #ffff;
+
+    /* ============================================
+       BORDER COLORS
+       ============================================ */
+    --color-border-primary: #d9d9d9;
+    --color-border-secondary: #757575;
+    --color-border-tertiary: #383838;
+    --color-border-base: #faf6f6;
+    --color-border-default: #e0e0e0;
+    --color-border-light-gray: #ebecec;
+    --color-border-gray-200: #e4e5e7;
+    --color-border-red: #e3c9c9;
+    --color-border-gray-ccc: #ccc;
+    --color-border-primary-light: rgba(138, 29, 32, 0.12);
+
+    /* ============================================
+       BACKGROUND COLORS - Light
+       ============================================ */
+    --color-bg-light: #f5f5f5;
+    --color-bg-default-grey: #f5f5f5;
+    --color-bg-grey: #f0f2f5;
+    --color-bg-beige: #f7f5f2;
+    --color-bg-light-pink: #ffe4f0;
+    --color-bg-light-blue: #ecf5ff;
+    --color-bg-pale-green: #f5ffe3;
+    --color-bg-pale-orange: #fff4e6;
+    --color-bg-soft-pink: #faf4f5;
+    --color-bg-soft-purple: #e2cee3;
+    --color-bg-lilac: #faf8fa;
+    --color-bg-light-purple: #f0e7f1;
+    --color-bg-pale-blue: #ecf2fc;
+    --color-bg-grayish-white: #f5f1f6;
+    --color-bg-honeydew: #effff2;
+    --color-bg-lavender-blush: #ffecf4;
+    --color-bg-linear-red: #f9f4f4;
+    --color-bg-cream: #fffdf1;
+    --color-bg-light-gray-alt: #f1f1f1;
+    --color-bg-warm-white: #f8f3e8;
+    --color-bg-gray-tint: rgba(240, 242, 245, 0.1);
+
+    /* Background Colors - Dark/Overlay */
+    --color-bg-overlay-dark: rgba(0, 0, 0, 0.8);
+    --color-bg-overlay-medium: rgba(0, 0, 0, 0.7);
+    --color-bg-overlay-light: rgba(0, 0, 0, 0.6);
+    --color-bg-overlay-lighter: rgba(0, 0, 0, 0.5);
+    --color-bg-overlay-darker: rgba(0, 0, 0, 0.9);
+    --color-bg-primary-tint: rgba(138, 29, 32, 0.15);
+    --color-bg-primary-tint-medium: rgba(138, 29, 32, 0.2);
+    --color-bg-chemistry-tint: rgba(133, 52, 140, 0.12);
+    --color-bg-blue-tint: rgba(14, 107, 242, 0.05);
+
+    /* ============================================
+       STATUS COLORS
+       ============================================ */
+    --color-status-online: #42a95a;
+    --color-status-success: #42a95a;
+    --color-status-danger: #900b09;
+    --color-status-error: #900b09;
+    --color-status-error-alt: #d73142;
+    --color-status-error-dark: #c1272d;
+
+    /* ============================================
+       ACCENT & UTILITY COLORS
+       ============================================ */
+    --color-blue-primary: #0d62dc;
+    --color-blue-secondary: #0e6bf2;
+    --color-blue-light: #549aff;
+    --color-purple-primary: #7f3fd3;
+    --color-purple-dark: #b744e1;
+    --color-purple-magenta: #d66d8e;
+    --color-lavender-indigo: #6d76d6;
+    --color-orange-primary: #ff894f;
+    --color-peachy-orange: #ffd096;
+    --color-yellow-dark: #ffec96;
+    --color-red-light: #ff9696;
+    --color-red-dark: #8b0000;
+    --color-green-granny-apple: #c7ebcf;
+    --color-pink-soft: #ddbdbf;
+    --color-peach-soft: #f1e4e4;
+    --color-beige-reddish: #ecdadb;
+    --color-rose-misty: #ffdaea;
+    --color-peach-light: #fee9e7;
+    --color-blue-deep: #1b1464;
+    --color-ocean: #29abe2;
+    --color-green-primary: #0a8f3b;
+    --color-purple-alt: #7e4195;
+    --color-purple-semi: #9e005d;
+
+    /* ============================================
+       COMPONENT-SPECIFIC COLORS
+       ============================================ */
+    /* Button Colors */
+    --color-button-primary: #871619;
+    --color-button-primary-alt: #871620;
+    --color-button-cyan: #008cba;
+    --color-button-primary-hover: rgba(135, 22, 25, 0.9);
+
+    /* Progress/Quiz Colors */
+    --color-progress-success: rgba(20, 174, 92, 0.24);
+    --color-progress-orange-brown: rgb(185, 97, 51);
+
+    /* Chat/Message Colors */
+    --color-chat-gray: #aaa;
+    --color-chat-light-gray: rgb(214, 212, 212);
+
+    /* Icon Colors */
+    --color-icon-blue: #93c6ff;
+    --color-icon-green: #9dcc48;
+    --color-icon-pink: #ffa1cb;
+    --color-icon-peach: #fad3a3;
+    --color-icon-purple: #cfabff;
+    --color-icon-light-gray: #f3f3f3;
+    --color-icon-yellow: #ffb31f;
+
+    /* NProgress Colors */
+    --color-nprogress: #29d;
+
+    /* ============================================
+       GRADIENTS
+       ============================================ */
+    --gradient-primary: linear-gradient(
+      95deg,
+      rgb(242, 113, 33) 0%,
+      rgb(233, 64, 87) 50%,
+      rgb(138, 35, 135) 100%
+    );
+    --gradient-primary-alt: linear-gradient(
+      136deg,
+      rgb(242, 113, 33) 0%,
+      rgb(233, 64, 87) 50%,
+      rgb(138, 35, 135) 100%
+    );
+    --gradient-light: linear-gradient(270deg, #fcf9f9 -40.63%, #fefcfc 94.64%);
+    --gradient-primary-subtle: linear-gradient(
+      270deg,
+      rgba(138, 29, 32, 0.05) -40.63%,
+      rgba(255, 255, 255, 0.05) 94.64%
+    );
+    --gradient-header: linear-gradient(
+      85.42deg,
+      rgba(255, 230, 231, 0.52) 0%,
+      rgba(250, 250, 250, 0.52) 48.67%,
+      rgba(255, 230, 231, 0.52) 100.87%
+    );
+    --gradient-subject-primary: linear-gradient(to bottom, #8a1d20, #ffdd00);
+
+    /* ============================================
+       SHADOW COLORS
+       ============================================ */
+    --color-shadow-light: rgba(0, 0, 0, 0.1);
+    --color-shadow-medium: rgba(0, 0, 0, 0.15);
+    --color-shadow-dark: rgba(0, 0, 0, 0.25);
+    --color-shadow-primary: rgba(136, 22, 25, 0.5);
+    --color-shadow-primary-light: rgba(136, 22, 25, 0.25);
+    --color-shadow-dark-gray: rgba(17, 17, 26, 0.1);
+  }
+
+  body {
+    font-family: "Mona Sans", sans-serif;
+  }
+
+  /* Prevent layout "jumping" when the page scrollbar appears/disappears. */
+  html {
+    scrollbar-gutter: stable;
+  }
+}
 
 /* Modern Gradient Backgrounds */
 .gradient-hero {
@@ -14,10 +250,10 @@
 
 /* Modern Card Styles */
 .card {
-  background: #ffffff;
+  background: var(--color-white);
   border-radius: 1rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03);
-  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 2px 8px var(--color-shadow-light);
+  border: 1px solid var(--color-border-primary);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -27,22 +263,23 @@
 }
 
 .card-hover {
-  background: #ffffff;
+  background: var(--color-white);
   border-radius: 1rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03);
-  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 2px 8px var(--color-shadow-light);
+  border: 1px solid var(--color-border-primary);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card-hover:hover {
-  box-shadow: 0 20px 40px -10px rgba(24, 144, 255, 0.15), 0 8px 16px -4px rgba(24, 144, 255, 0.1);
+  box-shadow: 0 20px 40px -10px var(--color-shadow-primary-light),
+    0 8px 16px -4px var(--color-shadow-medium);
   transform: translateY(-4px);
-  border-color: rgba(24, 144, 255, 0.2);
+  border-color: var(--color-border-primary-light);
 }
 
 /* Modern Button Styles */
 .btn-primary {
-  background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+  background: var(--gradient-primary);
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: 0.75rem;
@@ -60,8 +297,8 @@
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(24, 144, 255, 0.35);
-  background: linear-gradient(135deg, #096dd9 0%, #0050b3 100%);
+  box-shadow: 0 8px 20px var(--color-shadow-primary);
+  background: var(--gradient-primary-alt);
 }
 
 .btn-primary:active {
@@ -73,32 +310,32 @@
   width: 100%;
   padding: 0.875rem 1rem;
   border-radius: 0.75rem;
-  border: 2px solid #e2e8f0;
-  background: #ffffff;
+  border: 2px solid var(--color-border-primary);
+  background: var(--color-white);
   font-size: 0.9375rem;
-  color: #1e293b;
+  color: var(--color-text-primary);
   transition: all 0.2s ease;
   font-family: inherit;
 }
 
 .input:focus {
   outline: none;
-  border-color: #1890ff;
-  box-shadow: 0 0 0 3px rgba(24, 144, 255, 0.1);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-bg-primary-tint);
 }
 
 .input::placeholder {
-  color: #94a3b8;
+  color: var(--color-text-manatee);
 }
 
 .textarea {
   width: 100%;
   padding: 0.875rem 1rem;
   border-radius: 0.75rem;
-  border: 2px solid #e2e8f0;
-  background: #ffffff;
+  border: 2px solid var(--color-border-primary);
+  background: var(--color-white);
   font-size: 0.9375rem;
-  color: #1e293b;
+  color: var(--color-text-primary);
   transition: all 0.2s ease;
   font-family: inherit;
   resize: vertical;
@@ -106,12 +343,12 @@
 
 .textarea:focus {
   outline: none;
-  border-color: #1890ff;
-  box-shadow: 0 0 0 3px rgba(24, 144, 255, 0.1);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-bg-primary-tint);
 }
 
 .textarea::placeholder {
-  color: #94a3b8;
+  color: var(--color-text-manatee);
 }
 
 /* Modern Badge Styles */
@@ -126,15 +363,15 @@
 }
 
 .badge-neutral {
-  background: #f1f5f9;
-  color: #475569;
-  border: 1px solid #e2e8f0;
+  background: var(--color-bg-light);
+  color: var(--color-text-charcoal);
+  border: 1px solid var(--color-border-default);
 }
 
 .badge-primary {
-  background: linear-gradient(135deg, #e6f7ff 0%, #bae7ff 100%);
-  color: #096dd9;
-  border: 1px solid #91d5ff;
+  background: var(--gradient-primary-subtle);
+  color: var(--color-primary);
+  border: 1px solid var(--color-border-primary-light);
 }
 
 /* TipTap Editor Styles */
@@ -147,14 +384,14 @@
 
 .ProseMirror p {
   margin: 1em 0;
-  color: #404040;
+  color: var(--color-text-charcoal);
   line-height: 1.75;
 }
 
 .ProseMirror h1 {
   font-size: 1.875rem;
   font-weight: bold;
-  color: #1f1f1f;
+  color: var(--color-text-dark-gray);
   margin-top: 2rem;
   margin-bottom: 1rem;
 }
@@ -162,7 +399,7 @@
 .ProseMirror h2 {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #1f1f1f;
+  color: var(--color-text-dark-gray);
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
 }
@@ -170,7 +407,7 @@
 .ProseMirror h3 {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #1f1f1f;
+  color: var(--color-text-dark-gray);
   margin-top: 1rem;
   margin-bottom: 0.5rem;
 }
@@ -191,12 +428,12 @@
 
 .ProseMirror li {
   margin: 0.5em 0;
-  color: #404040;
+  color: var(--color-text-charcoal);
 }
 
 .ProseMirror strong {
   font-weight: bold;
-  color: #1f1f1f;
+  color: var(--color-text-dark-gray);
 }
 
 .ProseMirror em {
@@ -205,16 +442,38 @@
 
 .ProseMirror hr {
   border: none;
-  border-top: 2px solid #e5e5e5;
+  border-top: 2px solid var(--color-border-default);
   margin: 2em 0;
 }
 
 .ProseMirror blockquote {
-  border-left: 4px solid #1890ff;
+  border-left: 4px solid var(--color-primary);
   padding-left: 1rem;
   font-style: italic;
   color: #737373;
   margin: 1em 0;
+}
+
+/* Placeholder text for empty editor */
+.ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: var(--color-text-manatee);
+  pointer-events: none;
+  height: 0;
+}
+
+/* Selection color */
+.ProseMirror ::selection {
+  background-color: var(--color-bg-blue-tint);
+}
+
+/* Images inside editor */
+.ProseMirror img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
 }
 
 /* Custom Scrollbar */
@@ -224,16 +483,16 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #f5f5f5;
+  background: var(--color-bg-light);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: var(--color-border-gray-200);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: var(--color-border-secondary);
 }
 
 /* Modern Animations */

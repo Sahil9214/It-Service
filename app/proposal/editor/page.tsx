@@ -4,7 +4,10 @@ import { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import RichTextEditor from "@/components/RichTextEditor";
-import ShareButtons from "@/components/ShareButtons";
+import ShareButtons, {
+  buildProposalEmailHtml,
+} from "@/components/ShareButtons";
+import ProposalPreview from "@/components/ProposalPreview";
 import { getServiceById } from "@/lib/services";
 import { generateProposal } from "@/lib/proposalGenerator";
 import { ProposalFormData, GeneratedProposal } from "@/lib/types";
@@ -17,6 +20,7 @@ function ProposalEditorContent() {
   const [proposal, setProposal] = useState<GeneratedProposal | null>(null);
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(true);
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 
   useEffect(() => {
     if (!serviceId) {
@@ -58,6 +62,12 @@ function ProposalEditorContent() {
   if (!proposal) {
     return null;
   }
+
+  const emailHtml = buildProposalEmailHtml(
+    content,
+    proposal.clientName,
+    proposal.id,
+  );
 
   return (
     <div className="min-h-screen gradient-hero">
@@ -136,23 +146,52 @@ function ProposalEditorContent() {
                 Proposal Content
               </h2>
               <p className="text-base text-neutral-600">
-                Edit the proposal content below. You can format text, add
-                sections, and customize as needed.
+                Edit the proposal content below. This is based on the standard
+                EngineerBabu proposal template and will be used for preview,
+                PDF, and email.
               </p>
             </div>
-            <div className="badge bg-success-100 text-success-700 px-4 py-2 flex items-center gap-2">
-              <svg
-                className="w-4 h-4"
-                fill="currentColor"
-                viewBox="0 0 20 20"
+            <div className="flex flex-col sm:items-end gap-3">
+              <div className="badge bg-success-100 text-success-700 px-4 py-2 flex items-center gap-2">
+                <svg
+                  className="w-4 h-4"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                Auto-saved
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsPreviewOpen(true)}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-primary-200 text-primary-700 bg-primary-50/60 hover:bg-primary-100 text-sm font-semibold transition-colors"
               >
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              Auto-saved
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                  />
+                </svg>
+                Preview Proposal
+              </button>
             </div>
           </div>
           <RichTextEditor content={content} onChange={setContent} />
@@ -172,6 +211,12 @@ function ProposalEditorContent() {
             proposalId={proposal.id}
           />
         </div>
+
+        <ProposalPreview
+          html={emailHtml}
+          isOpen={isPreviewOpen}
+          onClose={() => setIsPreviewOpen(false)}
+        />
       </main>
     </div>
   );

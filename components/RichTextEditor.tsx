@@ -1,12 +1,283 @@
 "use client";
 
-import { useEditor, EditorContent } from "@tiptap/react";
+import { useCallback, useEffect, useState } from "react";
+import { useEditor, EditorContent, Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { useEffect } from "react";
+import Underline from "@tiptap/extension-underline";
+import Link from "@tiptap/extension-link";
+import TextAlign from "@tiptap/extension-text-align";
+import Color from "@tiptap/extension-color";
+import { TextStyle } from "@tiptap/extension-text-style";
+import Placeholder from "@tiptap/extension-placeholder";
 
 interface RichTextEditorProps {
   content: string;
   onChange: (content: string) => void;
+}
+
+interface ToolbarButtonProps {
+  onClick: () => void;
+  active?: boolean;
+  title: string;
+  children: React.ReactNode;
+}
+
+const ToolbarButton = ({
+  onClick,
+  active = false,
+  title,
+  children,
+}: ToolbarButtonProps) => (
+  <button
+    type="button"
+    onClick={onClick}
+    title={title}
+    className={`px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-300 ${
+      active
+        ? "bg-linear-to-r from-primary-500 to-primary-600 text-white shadow-md"
+        : "bg-white text-neutral-700 hover:bg-neutral-50 border border-neutral-200 hover:border-primary-200 hover:shadow-sm"
+    }`}
+  >
+    {children}
+  </button>
+);
+
+function Toolbar({ editor }: { editor: Editor }) {
+  const [showLinkInput, setShowLinkInput] = useState(false);
+  const [linkUrl, setLinkUrl] = useState("");
+  const [textColor, setTextColor] = useState("#000000");
+
+  const handleAddOrUpdateLink = useCallback(() => {
+    if (!editor) return;
+
+    let url = linkUrl.trim();
+    if (!url) {
+      setShowLinkInput(false);
+      return;
+    }
+
+    if (!url.startsWith("http://") && !url.startsWith("https://")) {
+      url = `https://${url}`;
+    }
+
+    if (!/^https?:\/\//.test(url)) {
+      return;
+    }
+
+    editor
+      .chain()
+      .focus()
+      .extendMarkRange("link")
+      .setLink({ href: url })
+      .run();
+
+    setShowLinkInput(false);
+    setLinkUrl("");
+  }, [editor, linkUrl]);
+
+  const handleToggleLink = useCallback(() => {
+    if (!editor) return;
+
+    if (editor.isActive("link")) {
+      editor.chain().focus().unsetLink().run();
+      setShowLinkInput(false);
+      setLinkUrl("");
+      return;
+    }
+
+    setShowLinkInput(true);
+  }, [editor]);
+
+  const handleTextAlign = useCallback(
+    (alignment: "left" | "center" | "right" | "justify") => {
+      if (!editor) return;
+      editor.chain().focus().setTextAlign(alignment).run();
+    },
+    [editor],
+  );
+
+  const handleColorChange = useCallback(
+    (value: string) => {
+      if (!editor) return;
+      setTextColor(value);
+      editor.chain().focus().setColor(value).run();
+    },
+    [editor],
+  );
+
+  if (!editor) return null;
+
+  return (
+    <div className="bg-linear-to-r from-neutral-50 via-white to-neutral-50 border-b border-neutral-200 p-4 flex flex-wrap gap-2 items-center">
+      {/* Basic formatting */}
+      <ToolbarButton
+        onClick={() => editor.chain().focus().toggleBold().run()}
+        active={editor.isActive("bold")}
+        title="Bold (Ctrl+B)"
+      >
+        <strong>B</strong>
+      </ToolbarButton>
+
+      <ToolbarButton
+        onClick={() => editor.chain().focus().toggleItalic().run()}
+        active={editor.isActive("italic")}
+        title="Italic (Ctrl+I)"
+      >
+        <em>I</em>
+      </ToolbarButton>
+
+      <ToolbarButton
+        onClick={() => editor.chain().focus().toggleUnderline().run()}
+        active={editor.isActive("underline")}
+        title="Underline"
+      >
+        <span className="underline">U</span>
+      </ToolbarButton>
+
+      <div className="hidden sm:block w-px bg-neutral-200 mx-1" />
+
+      {/* Headings */}
+      <ToolbarButton
+        onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
+        active={editor.isActive("heading", { level: 1 })}
+        title="Heading 1"
+      >
+        H1
+      </ToolbarButton>
+
+      <ToolbarButton
+        onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+        active={editor.isActive("heading", { level: 2 })}
+        title="Heading 2"
+      >
+        H2
+      </ToolbarButton>
+
+      <div className="hidden sm:block w-px bg-neutral-200 mx-1" />
+
+      {/* Lists */}
+      <ToolbarButton
+        onClick={() => editor.chain().focus().toggleBulletList().run()}
+        active={editor.isActive("bulletList")}
+        title="Bullet list"
+      >
+        • List
+      </ToolbarButton>
+
+      <ToolbarButton
+        onClick={() => editor.chain().focus().toggleOrderedList().run()}
+        active={editor.isActive("orderedList")}
+        title="Numbered list"
+      >
+        1.
+      </ToolbarButton>
+
+      <div className="hidden sm:block w-px bg-neutral-200 mx-1" />
+
+      {/* Alignment */}
+      <div className="flex items-center gap-1">
+        <ToolbarButton
+          onClick={() => handleTextAlign("left")}
+          active={editor.isActive({ textAlign: "left" })}
+          title="Align left"
+        >
+          L
+        </ToolbarButton>
+        <ToolbarButton
+          onClick={() => handleTextAlign("center")}
+          active={editor.isActive({ textAlign: "center" })}
+          title="Align center"
+        >
+          C
+        </ToolbarButton>
+        <ToolbarButton
+          onClick={() => handleTextAlign("right")}
+          active={editor.isActive({ textAlign: "right" })}
+          title="Align right"
+        >
+          R
+        </ToolbarButton>
+        <ToolbarButton
+          onClick={() => handleTextAlign("justify")}
+          active={editor.isActive({ textAlign: "justify" })}
+          title="Justify"
+        >
+          J
+        </ToolbarButton>
+      </div>
+
+      <div className="hidden sm:block w-px bg-neutral-200 mx-1" />
+
+      {/* Link */}
+      <div className="flex items-center gap-2">
+        <ToolbarButton
+          onClick={handleToggleLink}
+          active={editor.isActive("link")}
+          title="Add / remove link"
+        >
+          Link
+        </ToolbarButton>
+
+        {showLinkInput && (
+          <div className="flex items-center gap-2">
+            <input
+              type="url"
+              value={linkUrl}
+              onChange={(e) => setLinkUrl(e.target.value)}
+              placeholder="https://example.com"
+              className="w-40 sm:w-52 px-2 py-1.5 text-xs sm:text-sm border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+            />
+            <button
+              type="button"
+              onClick={handleAddOrUpdateLink}
+              className="px-3 py-1.5 rounded-md text-xs sm:text-sm font-semibold bg-primary-500 text-white hover:bg-primary-600"
+            >
+              Apply
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setShowLinkInput(false);
+                setLinkUrl("");
+              }}
+              className="px-3 py-1.5 rounded-md text-xs sm:text-sm font-semibold bg-neutral-100 text-neutral-700 hover:bg-neutral-200"
+            >
+              Cancel
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* Spacer */}
+      <div className="flex-1" />
+
+      {/* Color + Undo / Redo */}
+      <div className="flex items-center gap-3">
+        <label className="flex items-center gap-1 text-xs text-neutral-600">
+          Text color
+          <input
+            type="color"
+            value={textColor}
+            onChange={(e) => handleColorChange(e.target.value)}
+            className="w-7 h-7 rounded-md border border-neutral-300 cursor-pointer bg-white"
+          />
+        </label>
+
+        <ToolbarButton
+          onClick={() => editor.chain().focus().undo().run()}
+          title="Undo (Ctrl+Z)"
+        >
+          ↺
+        </ToolbarButton>
+        <ToolbarButton
+          onClick={() => editor.chain().focus().redo().run()}
+          title="Redo (Ctrl+Shift+Z)"
+        >
+          ↻
+        </ToolbarButton>
+      </div>
+    </div>
+  );
 }
 
 export default function RichTextEditor({
@@ -14,7 +285,28 @@ export default function RichTextEditor({
   onChange,
 }: RichTextEditorProps) {
   const editor = useEditor({
-    extensions: [StarterKit],
+    extensions: [
+      StarterKit,
+      Underline,
+      Link.configure({
+        openOnClick: false,
+        autolink: false,
+        linkOnPaste: false,
+        HTMLAttributes: {
+          class:
+            "text-primary-600 underline cursor-pointer hover:text-primary-700",
+        },
+        validate: (href) => /^https?:\/\//.test(href),
+      }),
+      TextAlign.configure({
+        types: ["heading", "paragraph"],
+      }),
+      TextStyle,
+      Color,
+      Placeholder.configure({
+        placeholder: "Edit your proposal here...",
+      }),
+    ],
     content,
     immediatelyRender: false,
     onUpdate: ({ editor }) => {
@@ -42,149 +334,13 @@ export default function RichTextEditor({
     );
   }
 
-  const ToolbarButton = ({ onClick, active, children, title }: any) => (
-    <button
-      type="button"
-      onClick={onClick}
-      title={title}
-      className={`px-4 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 ${
-        active
-          ? "bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-md"
-          : "bg-white text-neutral-700 hover:bg-neutral-50 border border-neutral-200 hover:border-primary-200 hover:shadow-sm"
-      }`}
-    >
-      {children}
-    </button>
-  );
-
   return (
     <div className="border-2 border-neutral-200 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-      <div className="bg-gradient-to-r from-neutral-50 via-white to-neutral-50 border-b border-neutral-200 p-4 flex gap-2 flex-wrap">
-        <ToolbarButton
-          onClick={() => editor.chain().focus().toggleBold().run()}
-          active={editor.isActive("bold")}
-          title="Bold (Ctrl+B)"
-        >
-          <strong>B</strong>
-        </ToolbarButton>
-
-        <ToolbarButton
-          onClick={() => editor.chain().focus().toggleItalic().run()}
-          active={editor.isActive("italic")}
-          title="Italic (Ctrl+I)"
-        >
-          <em>I</em>
-        </ToolbarButton>
-
-        <div className="w-px bg-neutral-200 mx-1"></div>
-
-        <ToolbarButton
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 1 }).run()
-          }
-          active={editor.isActive("heading", { level: 1 })}
-          title="Heading 1"
-        >
-          H1
-        </ToolbarButton>
-
-        <ToolbarButton
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 2 }).run()
-          }
-          active={editor.isActive("heading", { level: 2 })}
-          title="Heading 2"
-        >
-          H2
-        </ToolbarButton>
-
-        <div className="w-px bg-neutral-200 mx-1"></div>
-
-        <ToolbarButton
-          onClick={() => editor.chain().focus().toggleBulletList().run()}
-          active={editor.isActive("bulletList")}
-          title="Bullet List"
-        >
-          <svg
-            className="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
-        </ToolbarButton>
-
-        <ToolbarButton
-          onClick={() => editor.chain().focus().toggleOrderedList().run()}
-          active={editor.isActive("orderedList")}
-          title="Numbered List"
-        >
-          <svg
-            className="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"
-            />
-          </svg>
-        </ToolbarButton>
-
-        <div className="w-px bg-neutral-200 mx-1"></div>
-
-        <ToolbarButton
-          onClick={() => editor.chain().focus().undo().run()}
-          active={false}
-          title="Undo (Ctrl+Z)"
-        >
-          <svg
-            className="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"
-            />
-          </svg>
-        </ToolbarButton>
-
-        <ToolbarButton
-          onClick={() => editor.chain().focus().redo().run()}
-          active={false}
-          title="Redo (Ctrl+Y)"
-        >
-          <svg
-            className="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M21 10h-10a8 8 0 00-8 8v2m18-10l-6 6m6-6l-6-6"
-            />
-          </svg>
-        </ToolbarButton>
-      </div>
+      <Toolbar editor={editor} />
       <div className="bg-white min-h-[500px]">
         <EditorContent editor={editor} />
       </div>
     </div>
   );
 }
+

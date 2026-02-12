@@ -16,7 +16,13 @@ export default function ProposalForm({
   const router = useRouter();
   const [formData, setFormData] = useState<ProposalFormData>({
     clientName: "",
+    clientCompany: "",
+    projectName: serviceName || "",
+    documentVersion: "1.0",
+    proposalDate: "",
     industry: "",
+    projectVisionSummary: "",
+    projectScopeSummary: "",
     timeline: "",
     budget: "",
     notes: "",
@@ -46,6 +52,7 @@ export default function ProposalForm({
       </div>
 
       <div className="space-y-6">
+        {/* Project & Client Basics */}
         <div>
           <label className="block text-sm font-bold text-neutral-900 mb-3 flex items-center gap-2">
             <span>Client Name</span>
@@ -65,6 +72,85 @@ export default function ProposalForm({
 
         <div>
           <label className="block text-sm font-bold text-neutral-900 mb-3 flex items-center gap-2">
+            <span>Client Company Name</span>
+            <span className="text-danger-500">*</span>
+          </label>
+          <input
+            type="text"
+            required
+            value={formData.clientCompany}
+            onChange={(e) =>
+              setFormData({ ...formData, clientCompany: e.target.value })
+            }
+            className="input"
+            placeholder="Enter client organization name"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-bold text-neutral-900 mb-3 flex items-center gap-2">
+            <span>Project Name</span>
+            <span className="text-danger-500">*</span>
+          </label>
+          <input
+            type="text"
+            required
+            value={formData.projectName}
+            onChange={(e) =>
+              setFormData({ ...formData, projectName: e.target.value })
+            }
+            className="input"
+            placeholder="Enter project name as it should appear in the proposal"
+          />
+        </div>
+
+        {/* Document meta */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label className="block text-sm font-bold text-neutral-900 mb-3 flex items-center gap-2">
+              <span>Document Version</span>
+              <span className="text-danger-500">*</span>
+            </label>
+            <input
+              type="text"
+              required
+              value={formData.documentVersion}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  documentVersion: e.target.value,
+                })
+              }
+              className="input"
+              placeholder="e.g., 1.0"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-bold text-neutral-900 mb-3">
+              Proposal Date
+            </label>
+            <input
+              type="text"
+              value={formData.proposalDate}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  proposalDate: e.target.value,
+                })
+              }
+              className="input"
+              placeholder="e.g., 5 Dec, 2025 (leave empty to use today's date)"
+            />
+            <p className="text-xs text-neutral-500 mt-2">
+              Optional – if left empty, today&apos;s date will be used.
+            </p>
+          </div>
+        </div>
+
+        {/* Industry & Vision */}
+        <div>
+          <label className="block text-sm font-bold text-neutral-900 mb-3 flex items-center gap-2">
             <span>Industry</span>
             <span className="text-danger-500">*</span>
           </label>
@@ -80,6 +166,26 @@ export default function ProposalForm({
           />
         </div>
 
+        <div>
+          <label className="block text-sm font-bold text-neutral-900 mb-3">
+            Product Vision & Objective (summary)
+          </label>
+          <textarea
+            value={formData.projectVisionSummary}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                projectVisionSummary: e.target.value,
+              })
+            }
+            rows={4}
+            className="textarea"
+            placeholder="Short custom note that will be blended into the Product Vision & Objective section."
+          />
+          <p className="text-xs text-neutral-500 mt-2">Optional</p>
+        </div>
+
+        {/* Timeline, Budget & Scope summary */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label className="block text-sm font-bold text-neutral-900 mb-3">
@@ -114,6 +220,26 @@ export default function ProposalForm({
           </div>
         </div>
 
+        <div>
+          <label className="block text-sm font-bold text-neutral-900 mb-3">
+            Scope of Work (high-level summary)
+          </label>
+          <textarea
+            value={formData.projectScopeSummary}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                projectScopeSummary: e.target.value,
+              })
+            }
+            rows={5}
+            className="textarea"
+            placeholder="Optional overview of key modules, platforms, or scope details to blend into the Scope Of Work section."
+          />
+          <p className="text-xs text-neutral-500 mt-2">Optional</p>
+        </div>
+
+        {/* Additional notes */}
         <div>
           <label className="block text-sm font-bold text-neutral-900 mb-3">
             Additional Notes

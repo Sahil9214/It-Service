@@ -51,11 +51,28 @@ export interface FAQ {
 }
 
 export interface ProposalFormData {
-  clientName: string;
+  // Core client/project identifiers
+  clientName: string; // Person or primary contact name
+  clientCompany: string; // Company/organization name used in \"Prepared For\"
+  projectName: string; // Used in \"[Project Name] Proposal\"
+
+  // Document metadata
+  documentVersion: string; // e.g. \"1.0\"
+  proposalDate: string; // e.g. \"5 Dec, 2025\" - falls back to today's date if empty
+
+  // High-level context
   industry: string;
+  projectVisionSummary: string; // Short custom note feeding into \"Product Vision & Objective\"
+  projectScopeSummary: string; // Optional free-text scope summary feeding into \"Scope Of Work\"
+
+  // Commercials and timeline
   timeline: string;
   budget: string;
+
+  // Additional notes/context
   notes: string;
+
+  // Service mapping
   serviceId: string;
   serviceName: string;
   subDomainId?: string;
