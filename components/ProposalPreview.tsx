@@ -15,7 +15,7 @@ export default function ProposalPreview({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-      <div className="bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[85vh] flex flex-col border border-neutral-200">
+      <div className="bg-white/95 rounded-2xl shadow-[0_24px_80px_rgba(15,23,42,0.45)] max-w-6xl w-full max-h-[90vh] flex flex-col border border-neutral-200/80 overflow-hidden">
         <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-200 bg-neutral-50/80">
           <div>
             <h2 className="text-lg font-semibold text-neutral-900">
@@ -47,7 +47,7 @@ export default function ProposalPreview({
           </button>
         </div>
 
-        <div className="px-6 py-4 text-xs text-neutral-500 border-b border-neutral-100 bg-neutral-50/60">
+        <div className="px-6 py-4 text-xs text-neutral-500 border-b border-neutral-100 bg-neutral-50/80">
           <span className="inline-flex items-center gap-1">
             <svg
               className="w-3 h-3 text-primary-500"
@@ -64,11 +64,13 @@ export default function ProposalPreview({
           </span>
         </div>
 
-        <div className="flex-1 overflow-auto px-8 py-6 bg-neutral-50">
-          <article
-            className="prose prose-sm max-w-none bg-white rounded-xl shadow-sm border border-neutral-200 px-8 py-8"
-            dangerouslySetInnerHTML={{ __html: html }}
-          />
+        <div className="flex-1 overflow-auto px-10 py-8 bg-linear-to-b from-neutral-100 via-neutral-50 to-neutral-100">
+          <div className="flex justify-center">
+            <article
+              className="prose prose-sm relative w-full max-w-3xl bg-white rounded-xl shadow-[0_18px_55px_rgba(15,23,42,0.28)] border border-neutral-200 px-10 py-12 print:shadow-none print:border-none print:rounded-none"
+              dangerouslySetInnerHTML={{ __html: html }}
+            />
+          </div>
         </div>
 
         <div className="px-6 py-4 border-t border-neutral-200 bg-white flex justify-end">

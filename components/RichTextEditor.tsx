@@ -335,7 +335,7 @@ export default function RichTextEditor({
   }
 
   return (
-    <div className="border-2 border-neutral-200 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+    <div className="border-2 border-neutral-200 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
       <Toolbar editor={editor} />
       <div className="bg-white min-h-[500px]">
         <EditorContent editor={editor} />

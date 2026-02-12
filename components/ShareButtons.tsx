@@ -42,16 +42,19 @@ export default function ShareButtons({
   proposalId,
 }: ShareButtonsProps) {
   const generatePdfBlob = async () => {
-    // Create a temporary div to render HTML content
     const tempDiv = document.createElement("div");
     tempDiv.innerHTML = content;
+    // Approximate A4 width in pixels at 96 DPI for a crisp, doc-like page
     tempDiv.style.width = "800px";
-    tempDiv.style.padding = "40px";
-    tempDiv.style.backgroundColor = "white";
+    tempDiv.style.padding = "64px 72px";
+    tempDiv.style.backgroundColor = "#ffffff";
     tempDiv.style.position = "absolute";
     tempDiv.style.left = "-9999px";
-    tempDiv.style.fontFamily = "Arial, sans-serif";
-    tempDiv.style.lineHeight = "1.6";
+    tempDiv.style.top = "0";
+    tempDiv.style.boxSizing = "border-box";
+    tempDiv.style.fontFamily = `"Georgia", "Times New Roman", serif`;
+    tempDiv.style.lineHeight = "1.7";
+    tempDiv.style.color = "#111827";
     document.body.appendChild(tempDiv);
     const fileName = `${proposalId}_${clientName.replace(/\s+/g, "_")}.pdf`;
 
@@ -67,20 +70,27 @@ export default function ShareButtons({
 
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = pdf.internal.pageSize.getHeight();
-      const imgWidth = canvas.width;
-      const imgHeight = canvas.height;
-      const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
-      const imgX = (pdfWidth - imgWidth * ratio) / 2;
-      const imgY = 0;
+      // Inner page margins so each page has breathing room (Google Docs-like)
+      const marginTop = 12;
+      const marginBottom = 12;
+      const usableHeight = pdfHeight - marginTop - marginBottom;
 
-      pdf.addImage(
-        imgData,
-        "PNG",
-        imgX,
-        imgY,
-        imgWidth * ratio,
-        imgHeight * ratio,
-      );
+      // Scale the captured image to fit the PDF width and then paginate
+      const imgWidth = pdfWidth;
+      const imgHeight = (canvas.height * pdfWidth) / canvas.width;
+
+      let heightLeft = imgHeight;
+      let position = marginTop;
+
+      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+      heightLeft -= usableHeight;
+
+      while (heightLeft > 0) {
+        position = heightLeft - imgHeight + marginTop;
+        pdf.addPage();
+        pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+        heightLeft -= usableHeight;
+      }
 
       const blob = pdf.output("blob");
       return { blob, fileName };
@@ -119,7 +129,7 @@ export default function ShareButtons({
     <div className="flex flex-wrap gap-4">
       <button
         onClick={handleDownloadPDF}
-        className="px-6 py-4 bg-gradient-to-r from-danger-500 to-danger-600 text-black rounded-xl font-bold hover:from-danger-600 hover:to-danger-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center gap-3 text-base"
+        className="px-6 py-4 bg-linear-to-r from-danger-500 to-danger-600 text-black rounded-xl font-bold hover:from-danger-600 hover:to-danger-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center gap-3 text-base"
       >
         <div className="w-10 h-10 rounded-lg bg-black text-white flex items-center justify-center">
           <svg
@@ -141,7 +151,7 @@ export default function ShareButtons({
 
       <button
         onClick={handleShareEmail}
-        className="px-6 py-4 bg-gradient-to-r from-primary-500 to-primary-600 text-black rounded-xl font-bold hover:from-primary-600 hover:to-primary-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center gap-3 text-base"
+        className="px-6 py-4 bg-linear-to-r from-primary-500 to-primary-600 text-black rounded-xl font-bold hover:from-primary-600 hover:to-primary-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center gap-3 text-base"
       >
         <div className="w-10 h-10 rounded-lg bg-red-700 text-white flex items-center justify-center">
           <svg
